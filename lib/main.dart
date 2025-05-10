@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'models/settings.dart';
+import 'providers/profiles_provider.dart';
 import 'screens/home_screen.dart';
-import 'screens/settings/settings_screen.dart';  // Добавили импорт
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final settings = AppSettings();
+  final profilesProvider = ProfilesProvider();
   await settings.loadSettings();
   
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => settings,
+     MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => settings),
+        ChangeNotifierProvider(create: (_) => profilesProvider),
+      ],
       child: const RPGApp(),
     ),
   );
@@ -44,7 +48,7 @@ class RPGApp extends StatelessWidget {
         builder: (context) {
           return MediaQuery(
             data: MediaQuery.of(context).copyWith(
-              textScaleFactor: settings.textScaleFactor,
+              textScaler: TextScaler.linear(settings.textScaleFactor),
             ),
             child: const HomeScreen(),
           );

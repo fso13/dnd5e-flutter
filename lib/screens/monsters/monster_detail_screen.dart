@@ -4,7 +4,7 @@ import '../../models/monster.dart';
 class MonsterDetailScreen extends StatelessWidget {
   final Monster monster;
 
-  MonsterDetailScreen({required this.monster});
+  const MonsterDetailScreen({super.key, required this.monster});
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,9 @@
+import 'package:dnd53_flutter/screens/spells/spell_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'spells/spells_screen.dart';
 import 'monsters/monsters_screen.dart';
 import 'settings/settings_screen.dart';
+import 'profiles/profiles_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,21 +16,21 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
   // И добавим экран в _screens
   final List<Widget> _screens = [
-    const SpellsScreen(),
+    const SpellListScreen(),
     const MonstersScreen(),
+    const ProfilesScreen(),
     const SettingsScreen(),
   ];
   final List<Text> _titles = [
     Text("Заклинания"),
     Text("Монстры"),
+    Text("Профили"),
     Text("Настройки"),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: _titles[_currentIndex],
-      ),
+      appBar: AppBar(title: _titles[_currentIndex]),
       drawer: Drawer(
         child: Column(
           children: [
@@ -64,11 +66,20 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.settings, color: Colors.deepPurple),
-              title: const Text('Настройки'),
+              leading: const Icon(Icons.person, color: Colors.deepPurple),
+              title: const Text('Профили'),
               selected: _currentIndex == 2,
               onTap: () {
                 setState(() => _currentIndex = 2);
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings, color: Colors.deepPurple),
+              title: const Text('Настройки'),
+              selected: _currentIndex == 3,
+              onTap: () {
+                setState(() => _currentIndex = 3);
                 Navigator.pop(context);
               },
             ),

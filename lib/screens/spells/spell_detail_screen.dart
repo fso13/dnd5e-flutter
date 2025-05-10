@@ -29,10 +29,7 @@ class SpellDetailScreen extends StatelessWidget {
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 8),
-            Text(
-              spell.description,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
+            Text(spell.description),
           ],
         ),
       ),
